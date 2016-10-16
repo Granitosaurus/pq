@@ -1,8 +1,10 @@
+import re
+import json
+from json.decoder import JSONDecodeError
+from collections import OrderedDict
+
 from parsel import Selector
 from dicttoxml import dicttoxml
-from json.decoder import JSONDecodeError
-import json
-from collections import OrderedDict
 
 
 class PQ:
@@ -11,22 +13,20 @@ class PQ:
     def __init__(self, data):
         """
         :param data: input data_xml, either xml or json content
-        :param to_text: whether to convert xpaths and css to select text values from node
-        :param to_text_all: same as to_text but for all node's children instead
         """
         self.data = data
         self.sel = self._make_selector(self.data)
 
     def _make_selector(self, data):
         """
-        Creates a parsel Selector from data_xml.
-        Decides whether the data_xml is json or xml, converts json to xml.
+        Creates a parsel Selector from data.
+        Decides whether the data is json or xml, converts json to xml.
         :return: parsel.Selector
         """
         try:  # try to convert json -> xml, if not xml
             data = json.loads(data, object_pairs_hook=OrderedDict)
             text = dicttoxml(data).decode('utf-8')
-        except (TypeError, JSONDecodeError) as e:
+        except (TypeError, JSONDecodeError):
             text = data
         return Selector(text=text)
 
@@ -83,9 +83,12 @@ class PQ:
         :param path: xpath or css selector path
         :param func_name: 'css'|'xpath'
         :param to_text: retrieve node's text rather than xml code
-        :param to_text_all: retrieve node's all text rathern than xml code
+        :param to_text_all: retrieve node's all text rather than xml code
         :return: processed path
         """
+        if re.findall('text\(\)|::text', path):
+            # already has text
+            return path
         css = func_name == 'css'
         if to_text:
             if not css:
@@ -107,4 +110,3 @@ class PQ:
         :return: None
         """
         print(json.dumps(results, indent=4))
-
