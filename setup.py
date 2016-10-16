@@ -4,13 +4,13 @@ setup(
     name='pq',
     version='0.1',
     packages=['pq'],
-    url='',
+    url='https://github.com/granitosaurus/pq',
     license='GPLv3',
-    author='granitas',
-    author_email='',
+    author='granitosaurus',
+    author_email='bernardas.alisauskas@gmail.com',
     entry_points="""
         [console_scripts]
         pq=pq.cli:cli
     """,
-    description='Like jq but with xpath par parsel'
+    description='Command line xml and json processor for xpath and css selectors.'
 )
