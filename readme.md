@@ -4,6 +4,11 @@
 
 `pq` uses [`parsel`](https://github.com/scrapy/parsel) with the help of [`dicttoxml`](https://github.com/quandyfactory/dicttoxml) to parse `json` or `xml` files using **xpath** or **css selectors**.
 
+Try it out with:
+
+    pip install git+https://github.com/Granitas/pq
+
+
 # usage
 
     Usage: pq [OPTIONS] QUERY
