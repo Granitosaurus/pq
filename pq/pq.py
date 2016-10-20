@@ -95,16 +95,15 @@ class PQ:
             # already has text
             return path
         css = func_name == 'css'
-        if to_text:
-            if not css:
-                path += '/text()'
-            else:
-                path += '::text'
-        elif to_text_all:
-            if not css:
-                path += '//text()'
-            else:
-                path += ' ::text'
+        addon = ''
+        if css:
+            if to_text or to_text_all:
+                addon = '::text' if to_text else ' ::text'
+        else:
+            if to_text or to_text_all:
+                addon = '/text()' if to_text else '//text()'
+        paths = path.split('|') if not css else [path]
+        path = '|'.join(p + addon for p in paths)
         return path
 
     @staticmethod
@@ -116,6 +115,7 @@ class PQ:
         :return: None
         """
         if compact:
-            print(json.dumps(results))
+            result = json.dumps(results)
         else:
-            print(json.dumps(results, indent=4))
+            result = json.dumps(results, indent=4)
+        print(result.replace('\\"', '"'))
