@@ -11,18 +11,18 @@ Try it out with:
 
 # usage
 
-Usage: pq [OPTIONS] QUERY [INFILE]
+    Usage: pq [OPTIONS] QUERY [INFILE]
 
-  Command line xml and json processor for xpath and css selectors.
+      Command line xml and json processor for xpath and css selectors.
 
-Options:
-  --css            use css selectors instead of xpath
-  -t, --text       get only the text (no markup)
-  -j, --json       [experimental] convert xml output to json
-  -c, --compact    compact instead of pretty-printed output
-  -tt, --text-all  like to_text but gets all text including node's children
-  -f, --first      only the first element
-  --help           Show this message and exit.
+    Options:
+      --css            use css selectors instead of xpath
+      -t, --text       get only the text (no markup)
+      -j, --json       [experimental] convert xml output to json
+      -c, --compact    compact instead of pretty-printed output
+      -tt, --text-all  like to_text but gets all text including node's children
+      -f, --first      only the first element
+      --help           Show this message and exit.
 
 # examples
 ## parse xml
