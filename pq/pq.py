@@ -130,6 +130,8 @@ class PQ:
         # defaults
         to_text = self.to_text if to_text is None else to_text
         to_text_all = self.to_text_all if to_text_all is None else to_text_all
+        if not isinstance(results, list):
+            results = [results]
 
         if to_text_all:
             return clean_text(''.join(results))
