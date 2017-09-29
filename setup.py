@@ -8,6 +8,10 @@ setup(
     license='GPLv3',
     author='granitosaurus',
     author_email='bernardas.alisauskas@gmail.com',
+    install_requires=[
+        'parsel',
+        'dicttoxml'
+    ],
     entry_points="""
         [console_scripts]
         pq=pq.cli:cli

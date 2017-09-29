@@ -47,7 +47,7 @@ class PQ:
             text = dicttoxml(data).decode('utf-8')
         except (TypeError, JSONDecodeError):
             text = data
-        return Selector(text=text)
+        return Selector(text=text, type='xml')
 
     def _path(self, func_name, path, to_text=None, to_text_all=None, first=False):
         """Base function for self.xpath and self.css"""
@@ -140,9 +140,9 @@ class PQ:
         elif to_json:
             result = json.dumps([result_to_json(r) for r in results], indent=2 if not compact else 0,)
             return result
-        results = Selector(text=''.join(results))
+        results = Selector(text=''.join(results), type='xml')
         if compact:
-            return results
+            return results.extract()
         else:
             return etree.tostring(results.root, pretty_print=True)
 
