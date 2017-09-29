@@ -9,6 +9,7 @@ setup(
     author='granitosaurus',
     author_email='bernardas.alisauskas@gmail.com',
     install_requires=[
+        'click',
         'parsel',
         'dicttoxml'
     ],
